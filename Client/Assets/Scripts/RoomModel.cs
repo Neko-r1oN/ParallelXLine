@@ -4,7 +4,7 @@
 ///  Author : ìŒû‹—C  2025.01/28
 ///
 ////////////////////////////////////////////////////////////////////////////
-/*
+
 using Cysharp.Net.Http;
 using Cysharp.Threading.Tasks;
 using Grpc.Net.Client;
@@ -192,7 +192,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     //ˆÚ“®’Ê’m
     public void OnMove(MoveData moveData)
     {
-        MovedUser(moveData);
+        //MovedUser(moveData);
     }
 
 
@@ -202,16 +202,11 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         StandUser();
     }
 
-    //€”õŠ®—¹ˆ—
-    public async Task ReadyAsync(Guid id, bool isReady)
-    {
-        await roomHub.ReadyAsync(id, isReady);
-    }
     //’Ê’m
     public void Ready(Guid id, bool isStart)
     {
         ReadyUser(id, isStart);
     }
    
-}*/
+}
 

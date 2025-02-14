@@ -1,7 +1,7 @@
 using Grpc.Net.Client;
 using MagicOnion;
 using MagicOnion.Server;
-//using MagicOnion.Server.HttpGateway.Swagger;
+using MagicOnion.Server.HttpGateway.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseKestrel(option =>

@@ -2,7 +2,7 @@ using Cysharp.Net.Http;
 using Cysharp.Threading.Tasks;
 using Grpc.Net.Client;
 using MagicOnion.Client;
-using Shared.Interfaces.Services;
+using Shared.Interfaces.RPCServices;
 using Shared.Interfaces.StreamingHubs;
 using Shared.Model.Entity;
 using System;

@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class OptionManager : MonoBehaviour
 {
     [SerializeField] Text windowSizeText;     //ウィンドウサイズテキスト
-    [SerializeField] Text windowModeText;     //ウィンドウモードテキスト
+    [SerializeField] Text screenModeText;     //スクリーンモードテキスト
 
 
     void Start()
     {
-        
+        /*if(Screen.fullScreen) windowModeText.text = "ウィンドウモード";
+        else windowSizeText.text = "フルスクリーンモード";*/
     }
 
     // Update is called once per frame
@@ -20,19 +21,31 @@ public class OptionManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 解像度変更関数
+    /// </summary>
+    public void OnClickChangeWindowSize()
+    {
+        Screen.SetResolution(1920, 1080, Screen.fullScreen);
+
+    }
+
+    /// <summary>
+    /// ウィンドウモード切替関数
+    /// </summary>
     public void OnClickChangeScreenMode()
     {
         if (Screen.fullScreen)
         {
             // ウィンドウモードに切り替え
             Screen.fullScreen = false;
-            windowModeText.text = "フルスクリーンモード";
+            screenModeText.text = "フルスクリーンモード";
         }
         else
         {
             // フルスクリーンモードに切り替え
             Screen.fullScreen = false;
-            windowModeText.text = "ウィンドウモード";
+            screenModeText.text = "ウィンドウモード";
         }
     }
 }

@@ -6,7 +6,7 @@ using MessagePack.Unity;
 /// <summary>
 /// MagicOnion用インタフェースのコード生成
 /// </summary>
-[MagicOnionClientGeneration(typeof(Shared.Interfaces.Services.IUserService))]
+[MagicOnionClientGeneration(typeof(Shared.Interfaces.RPCServices.IUserService))]
 partial class MagicOnionInitializer
 {
     /// <summary>

@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8042b29ff87dd5506d7aad72bd6d8d7405985f27"
+      "hash": "f9fd769be7c634610f2a61aa914a1a55f34740e1"
     },
     "com.cysharp.yetanotherhttphandler": {
       "version": "https://github.com/Cysharp/YetAnotherHttpHandler.git?path=src/YetAnotherHttpHandler#1.6.0",
@@ -19,7 +19,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "46e771daa4b2b00db9bd7356ab3c8874c9d83cb4"
+      "hash": "0d0e4af9c79d63224ae26f1a3e822300b1475da7"
     },
     "com.magiconion-server.shared": {
       "version": "file:../../Shared",
@@ -292,7 +292,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "610157ad762084380380148ba8ce14e266a6da97"
+      "hash": "d1ef610e9fe3ad0b490cce91594449fc0af809a6"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

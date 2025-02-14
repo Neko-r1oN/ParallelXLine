@@ -4,7 +4,7 @@ using System.Text;
 using MagicOnion;
 using Shared.Model.Entity;
 
-namespace Shared.Interfaces.Services
+namespace Shared.Interfaces.RPCServices
 {
     public interface IUserService : IService<IUserService>
     {//ここにどのようなAPIを作るか、関数形式で定義を作成
