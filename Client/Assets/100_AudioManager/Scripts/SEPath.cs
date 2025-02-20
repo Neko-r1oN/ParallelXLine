@@ -5,7 +5,8 @@
 /// </summary>
 public static class SEPath{
 
-	public const string TAP = "SE/Tap";
+	public const string TAP   = "SE/01_System/Tap";
+	public const string TRAIN = "SE/02_Env/Train";
 
 }
 

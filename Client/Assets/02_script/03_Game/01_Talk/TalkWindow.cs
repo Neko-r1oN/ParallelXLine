@@ -34,9 +34,10 @@ public class TalkWindow : MonoBehaviour
 
     // キャラデータ.
     [SerializeField] CharacterData data = null;
-
     // 背景データ.
     [SerializeField] BackgroundData bgData = null;
+    // BGMデータ.
+    [SerializeField] BGMData bgmData = null;
 
     // 左キャライメージ.
     [SerializeField] Image leftCharacterImage = null;
@@ -47,6 +48,9 @@ public class TalkWindow : MonoBehaviour
 
     // 背景イメージ.
     [SerializeField] Image bgImage = null;
+    // 背景イメージ.
+    [SerializeField] AudioClip bgm = null;
+
     // 背景トランジション.
     [SerializeField] UITransition bgTransition = null;
 
@@ -318,6 +322,41 @@ public class TalkWindow : MonoBehaviour
         else
         {
             bgImage.sprite = sp;
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // BGMの設定.
+    // -----------------------------------------------------------------
+    public async UniTask SetBGM(string place, bool isImmediate)
+    {
+        var sp = bgmData.GetMusic(place);
+        bgTransition.gameObject.SetActive(true);
+
+        var currentBg = bgImage.sprite.name;
+        if (currentBg == sp.name)
+        {
+            Debug.Log("同じ背景なので変更をスキップします。");
+            return;
+        }
+
+        if (isImmediate == false)
+        {
+            try
+            {
+                await bgTransition.TransitionOutWait();
+                //bgImage.sprite = sp;
+                await bgTransition.TransitionInWait();
+            }
+            catch (System.OperationCanceledException e)
+            {
+                Debug.Log("SetBg キャンセル。");
+                throw e;
+            }
+        }
+        else
+        {
+            //bgImage.sprite = sp;
         }
     }
 }
