@@ -82,6 +82,9 @@ public class TitleManager : MonoBehaviour
         BGMManager.Instance.FadeOut(BGMPath.TITLE, 3, () => {
             Debug.Log("BGMフェードアウト終了");
         });
+        SEManager.Instance.FadeOut(SEPath.TRAIN, 3, () => {
+            Debug.Log("BGMフェードアウト終了");
+        });
     }
 
     /// <summary>

@@ -9,9 +9,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveData
+public class OptionData
 {
-    public string Name { get; set; }
-    public int UserID { get; set; }
-    public string AuthToken { get; set; }
+    public int windowSize { get; set; }       //ウィンドウサイズ
+    public int screenMode { get; set; }       //スクリーンモード
+    public int textSize { get; set; }         //テキストサイズ
+    public int textSpeed { get; set; }        //文字送りスピード
+    public float BGMVolume { get; set; }      //BGMボリューム
+    public float SEVolume { get; set; }       //SEボリューム
 }
