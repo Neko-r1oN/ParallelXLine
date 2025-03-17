@@ -8,6 +8,7 @@ public class OptionManager : MonoBehaviour
     [SerializeField] Text windowSizeText;     //ウィンドウサイズテキスト
     [SerializeField] Text screenModeText;     //スクリーンモードテキスト
 
+    public int windowSize { get; set; }         //ウィンドウサイズ
 
     void Start()
     {
@@ -47,5 +48,22 @@ public class OptionManager : MonoBehaviour
             Screen.fullScreen = false;
             screenModeText.text = "ウィンドウモード";
         }
+    }
+
+    //
+    public void SetResolution()
+    {
+        /*if()
+        Screen.SetResolution(width, height, Screen.fullScreen);*/
+    }
+
+    public void SetResolution1080p()
+    {
+        //SetResolution(1920, 1080);
+    }
+
+    public void SetResolution720p()
+    {
+        //SetResolution(1280, 720);
     }
 }

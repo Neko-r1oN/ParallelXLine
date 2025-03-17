@@ -24,7 +24,7 @@ using UnityEngine.Networking;
 /// <summary>
 /// ユーザー処理クラス
 /// </summary>
-public class OptoinModel : BaseModel
+public class OptionModel : BaseModel
 {
     public int windowSize { get; set; }       //ウィンドウサイズ
     public int screenMode { get; set; }       //スクリーンモード
@@ -34,17 +34,17 @@ public class OptoinModel : BaseModel
     public float SEVolume { get; set; }       //SEボリューム
 
 
-    private static OptoinModel instance;
+    private static OptionModel instance;
 
-    public static OptoinModel Instance
+    public static OptionModel Instance
     {
         get
         {
             if (instance == null)
             {
-                GameObject gameObj = new GameObject("UserModel");
+                GameObject gameObj = new GameObject("OptionModel");
                 //GameObject生成、NetworkManagerコンポーネントを追加
-                instance = gameObj.AddComponent<OptoinModel>();
+                instance = gameObj.AddComponent<OptionModel>();
                 //シーン移動時に削除しないようにする
                 DontDestroyOnLoad(gameObj);
             }
@@ -53,11 +53,11 @@ public class OptoinModel : BaseModel
     }
 
     /// <summary>
-    /// ユーザー登録処理
+    /// 設定情報保存処理
     /// </summary>
     /// <param name="name">ユーザー名</param>
     /// <returns>登録成功 or 失敗</returns>
-    public async UniTask<bool> RegistUserAsync(string name)
+    public async UniTask<bool> RegistOptionAsync(string name)
     {
         var handler = new YetAnotherHttpHandler() { Http2Only = true };
         var channel = GrpcChannel.ForAddress(ServerURL, new GrpcChannelOptions() { HttpHandler = handler });

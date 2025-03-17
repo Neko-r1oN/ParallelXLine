@@ -10,15 +10,22 @@ public class TitleManager : MonoBehaviour
 
     [SerializeField] GameObject fade;
     [SerializeField] GameObject menu;
+
     public static bool isMenuFlag;
 
-    
+    bool isSuccess;
 
     void Start()
     {
         fade.SetActive(true);               //フェードを有効化
         menu.SetActive(false);              //メニューを非表示
         isMenuFlag = false;                 //メニューフラグを無効化
+
+        //ローカルのユーザーデータを取得
+        isSuccess = UserModel.Instance.LoadUserData();
+
+        //ローカルのユーザーデータを取得
+        isSuccess = OptionModel.Instance.LoadOptionData();
 
         //BGM再生
         BGMManager.Instance.Play(

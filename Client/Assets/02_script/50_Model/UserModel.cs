@@ -26,9 +26,8 @@ using UnityEngine.Networking;
 /// </summary>
 public class UserModel : BaseModel
 {
-    public int userId { get; set; }       //登録ユーザーID
-    public string userName { get; set; }   //登録ユーザー名
-
+    public int userId { get; set; }         //登録ユーザーID
+    public string userName { get; set; }    //登録ユーザー名
     public string authToken { get; set; }   //登録ユーザートークン
 
     private static UserModel instance;
