@@ -155,7 +155,7 @@ public class TalkWindow : MonoBehaviour
                     nextArrow.gameObject.SetActive(false);
                     await SetCharacter(talk);
 
-                    await UniTask.Delay((int)(0.5f * 1000f), cancellationToken: this.gameObject.GetCancellationTokenOnDestroy());
+                    await UniTask.Delay((int)(0.0f * 1000f), cancellationToken: this.gameObject.GetCancellationTokenOnDestroy());
 
                     foreach (char word in talk.Talk)
                     {
@@ -197,6 +197,103 @@ public class TalkWindow : MonoBehaviour
     // キャラ画像の設定.
     // -----------------------------------------------------------------
     async UniTask SetCharacter(StoryData storyData)
+    {
+        // Nullならすべて消す.
+        if (storyData == null)
+        {
+            leftCharacterImage.gameObject.SetActive(false);
+            centerCharacterImage.gameObject.SetActive(false);
+            rightCharacterImage.gameObject.SetActive(false);
+            return;
+        }
+
+        try
+        {
+            var tasks = new List<UniTask>();
+            bool hideLeft = false;
+            bool hideCenter = false;
+            bool hideRight = false;
+
+            // 左キャラ設定.
+            if (string.IsNullOrEmpty(storyData.Left) == true)
+            {
+                tasks.Add(leftCharacterImageTransition.TransitionOutWait());
+                hideLeft = true;
+            }
+            else if (currentLeft != storyData.Left)
+            {
+                var img = data.GetCharacterSprite(storyData.Left);
+                leftCharacterImage.sprite = img;
+                leftCharacterImage.gameObject.SetActive(true);
+                tasks.Add(leftCharacterImageTransition.TransitionInWait());
+
+                currentLeft = storyData.Left;
+            }
+            else
+            {
+                Debug.Log("同じなので変化なし.");
+            }
+
+            // 真ん中キャラ設定.
+            if (string.IsNullOrEmpty(storyData.Center) == true)
+            {
+                tasks.Add(centerCharacterImageTransition.TransitionOutWait());
+                hideCenter = true;
+            }
+            else if (currentCenter != storyData.Center)
+            {
+                var img = data.GetCharacterSprite(storyData.Center);
+                centerCharacterImage.sprite = img;
+                centerCharacterImage.gameObject.SetActive(true);
+                tasks.Add(centerCharacterImageTransition.TransitionInWait());
+
+                currentCenter = storyData.Center;
+            }
+            else
+            {
+                Debug.Log("同じなので変化なし.");
+            }
+
+            // 右キャラ設定.
+            if (string.IsNullOrEmpty(storyData.Right) == true)
+            {
+                tasks.Add(rightCharacterImageTransition.TransitionOutWait());
+                hideRight = true;
+            }
+            else if (currentRight != storyData.Right)
+            {
+                var img = data.GetCharacterSprite(storyData.Right);
+                rightCharacterImage.sprite = img;
+                rightCharacterImage.gameObject.SetActive(true);
+                tasks.Add(rightCharacterImageTransition.TransitionInWait());
+
+                currentRight = storyData.Right;
+            }
+            else
+            {
+                Debug.Log("同じなので変化なし.");
+            }
+
+            // 待機.
+            await UniTask.WhenAll(tasks);
+
+            // 消したいキャラを消す.
+            if (hideLeft == true) leftCharacterImage.gameObject.SetActive(false);
+            if (hideCenter == true) centerCharacterImage.gameObject.SetActive(false);
+            if (hideRight == true) rightCharacterImage.gameObject.SetActive(false);
+
+        }
+        catch (System.OperationCanceledException e)
+        {
+            Debug.Log("SetCharactor キャンセル。");
+            throw e;
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // キャラ画像の設定.
+    // -----------------------------------------------------------------
+    async UniTask SetEmote(StoryData storyData)
     {
         // Nullならすべて消す.
         if (storyData == null)
@@ -336,7 +433,7 @@ public class TalkWindow : MonoBehaviour
         var currentBg = bgImage.sprite.name;
         if (currentBg == sp.name)
         {
-            Debug.Log("同じ背景なので変更をスキップします。");
+            Debug.Log("同じBGMなので変更をスキップします。");
             return;
         }
 
@@ -359,4 +456,5 @@ public class TalkWindow : MonoBehaviour
             //bgImage.sprite = sp;
         }
     }
+
 }

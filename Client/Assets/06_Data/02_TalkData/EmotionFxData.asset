@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f8a508e5d1afb4ab184c03e16b76b3, type: 3}
-  m_Name: BGMData
+  m_Script: {fileID: 11500000, guid: e9a58bcd77282d64d885658a7bf61f18, type: 3}
+  m_Name: EmotionFxData
   m_EditorClassIdentifier: 
-  Memo: "BGM\u95A2\u9023\u4ED8\u3051\u30C7\u30FC\u30BF"
+  Memo: "\u611F\u60C5\u30A8\u30D5\u30A7\u30AF\u30C8\u95A2\u9023\u4ED8\u3051\u30C7\u30FC\u30BF"
   Parameters:
-  - Name: 
-    BGM: {fileID: 0}
+  - DisplayName: "\u30AD\u30E9\u30AD\u30E9"
+    EmotionFx: 5
+    ImageParams: []
