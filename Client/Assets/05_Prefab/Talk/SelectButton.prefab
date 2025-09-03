@@ -36,7 +36,6 @@ RectTransform:
   m_Children:
   - {fileID: 2137418142605977104}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -204,7 +203,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3077583919614147424}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -241,7 +239,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 62c538b79087e6042b911dfcd669d218, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -1799871926301029530, guid: 62c538b79087e6042b911dfcd669d218, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

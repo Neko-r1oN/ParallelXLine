@@ -4,6 +4,9 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine.UI;
+using TMP_Ruby;
+using System.Linq;
+
 
 // -----------------------------------------------------------------
 // 会話ウインドウ.
@@ -14,7 +17,8 @@ public class TalkWindow : MonoBehaviour
     // 名前のテキスト.
     [SerializeField] Text nameText = null;
     // 会話内容テキスト.
-    [SerializeField] Text talkText = null;
+    //[SerializeField] TextMeshPro talkText = null;
+    [SerializeField] TextMeshProRuby talkText = null;
 
     // 次ページへ表示画像.
     [SerializeField] Image nextArrow = null;
@@ -24,6 +28,15 @@ public class TalkWindow : MonoBehaviour
 
     // 会話のトランジション.
     [SerializeField] UITransition talkWindowTransition = null;
+
+    // 色替え用追加部分. ********
+    bool isInTag = false;
+    string tagStrings = "";
+
+    // ルビ(ふりがな)用追加部分. ********
+    bool isInRubyTag = false;
+    string tagRubyStrings = "";
+
 
     // 次へフラグ.
     bool goToNextPage = false;
@@ -93,7 +106,8 @@ public class TalkWindow : MonoBehaviour
     {
         SetCharacter(null).Forget();
         nameText.text = initName;
-        talkText.text = initText;
+        //talkText.text = initText;
+        talkText.Text = initText;
         nextArrow.gameObject.SetActive(false);
         talkWindowTransition.gameObject.SetActive(true);
         await talkWindowTransition.TransitionInWait();
@@ -148,23 +162,111 @@ public class TalkWindow : MonoBehaviour
                 else
                 {
                     nameText.text = data.GetCharacterName(talk.Name);
-                    talkText.text = "";
+                    talkText.Text = "";
                     goToNextPage = false;
                     currentPageCompleted = false;
                     isSkip = false;
                     nextArrow.gameObject.SetActive(false);
+
+                    string rubyCheckTxt = "";
+
                     await SetCharacter(talk);
 
-                    await UniTask.Delay((int)(0.0f * 1000f), cancellationToken: this.gameObject.GetCancellationTokenOnDestroy());
+                    await UniTask.Delay((int)(0.0f * 5000f), cancellationToken: this.gameObject.GetCancellationTokenOnDestroy());
 
                     foreach (char word in talk.Talk)
                     {
-                        talkText.text += word;
+                        // 色替え用判定部分  *****************
+                        bool isCloseTag = false;
+
+                        // ルビ(ふりがな)判定部分  *****************
+                        rubyCheckTxt += word;
+                        string rubyJudgeTxt = "";
+
+                        int textNum = tagStrings.Count();
+                        if (textNum >= 3)
+                        {
+                            rubyJudgeTxt = tagStrings.Substring(tagStrings.Length - 3);
+
+                            if (isInTag==true && rubyJudgeTxt == "<r=")
+                            {
+                                isInRubyTag = true;
+                                Debug.Log("ルビ入った");
+                            }
+                        }
+
+                        if (isInRubyTag == false && word.ToString() == "<")
+                        {
+                            Debug.Log("< です。");
+                            isInTag = true;
+                        }
+                        else if (isInRubyTag == false && word.ToString() == ">")
+                        {
+                            Debug.Log("> です。");
+                            isInTag = false;
+                            isCloseTag = true;
+                           
+                        }
+
+                        
+
+                        if (isInTag == true && isInRubyTag == true)
+                        {
+                            string text = "";
+
+                            textNum = tagStrings.Count();
+                            bool isCanCheck = false;
+                            Debug.Log(textNum);
+
+                            if (textNum >= 4)
+                            {
+                                isCanCheck = true; 
+                                text = tagStrings.Substring(tagStrings.Length - 4);
+                                Debug.Log(text);
+                            }
+
+                            if (isCanCheck == true && text == "</r>")
+                            {
+                                Debug.Log("締め");
+                                isInTag = false;
+                                isCloseTag = true;
+                                isInRubyTag = false;
+                            }
+                        }
+
+                        if (isInTag == false && isCloseTag == false && string.IsNullOrEmpty(tagStrings) == false && isInRubyTag == false)
+                        {
+                            var _word = tagStrings + word;
+                            talkText.Text += _word;
+                            tagStrings = "";
+                        }
+                        
+                        else if (isInTag == true || isCloseTag == true)
+                        {
+                            tagStrings += word;
+                            Debug.Log("Tab内です。");
+                            continue;
+                        }
+                        else if (isInRubyTag == true || isCloseTag == true)
+                        {
+                            tagStrings += word;
+                            Debug.Log("Tab内(ふりがな)です。");
+                            continue;
+                        }
+                        else
+                        {
+                            talkText.Text += word;
+                        }
+
+                        // ********************************
+                        // 下の文字追加処理をコメントアウト.
+                        // talkText.text += word;
+                        // ********************************
                         await UniTask.Delay((int)(wordInterval * 1000f), cancellationToken: this.gameObject.GetCancellationTokenOnDestroy());
 
                         if (isSkip == true)
                         {
-                            talkText.text = talk.Talk;
+                            talkText.Text = talk.Talk;
                             break;
                         }
                     }
