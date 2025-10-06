@@ -28,7 +28,8 @@ public class UserModel : BaseModel
 {
     public int userId { get; set; }         //登録ユーザーID
     public string userName { get; set; }    //登録ユーザー名
-    public string authToken { get; set; }   //登録ユーザートークン
+    public string playerName { get; set; }  //登録プレイヤー名
+    public Vector3 playerPos { get; set; }   //登録プレイヤー座標
 
     private static UserModel instance;
 
@@ -68,7 +69,8 @@ public class UserModel : BaseModel
             //ファイルにユーザーを保存
             this.userName = name;
             this.userId = user.Id;
-            this.authToken = user.Token;
+            this.playerName = user.PlayerName;
+            this.playerPos = user.PlayerPos;
             SaveUserData();
             return true;
         }
@@ -84,9 +86,10 @@ public class UserModel : BaseModel
     private void SaveUserData()
     {
         SaveData saveData = new SaveData();
-        saveData.Name = this.userName;
+        saveData.UserName = this.userName;
         saveData.UserID = this.userId;
-        saveData.AuthToken = this.authToken;
+        saveData.PlayerName = this.playerName;
+        saveData.PlayerName = this.playerName;
         string json = JsonConvert.SerializeObject(saveData);
 
         //ファイルにJsonを保存
@@ -111,8 +114,9 @@ public class UserModel : BaseModel
 
         //ローカルファイルから各種値を取得
         this.userId = saveData.UserID;
-        this.userName = saveData.Name;
-        this.authToken = saveData.AuthToken;
+        this.userName = saveData.UserName;
+        this.playerName = saveData.PlayerName;
+        this.playerPos = saveData.PlayerPos;
 
         //読み込み判定
         return true;
@@ -138,7 +142,8 @@ public class UserModel : BaseModel
             //ファイルにユーザーを保存
             this.userName = user.Name;
             this.userId = user.Id;
-            this.authToken = user.Token;
+            this.playerName = user.PlayerName;
+            this.playerPos = user.PlayerPos;
 
             //SaveUserData();
 

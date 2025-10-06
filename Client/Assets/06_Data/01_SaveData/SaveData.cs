@@ -11,7 +11,9 @@ using UnityEngine;
 
 public class SaveData
 {
-    public string Name { get; set; }
-    public int UserID { get; set; }
-    public string AuthToken { get; set; }
+    public string UserName { get; set; }    //ユーザー名
+    public int UserID { get; set; }         //ユーザーID
+    public string PlayerName { get; set; }  //プレイヤー(ゲーム内)名
+    public Vector3 PlayerPos { get; set; }  //プレイヤー座標
+
 }

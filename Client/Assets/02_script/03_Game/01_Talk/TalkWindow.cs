@@ -191,18 +191,18 @@ public class TalkWindow : MonoBehaviour
                             if (isInTag==true && rubyJudgeTxt == "<r=")
                             {
                                 isInRubyTag = true;
-                                Debug.Log("ルビ入った");
+                               
                             }
                         }
 
                         if (isInRubyTag == false && word.ToString() == "<")
                         {
-                            Debug.Log("< です。");
+                            
                             isInTag = true;
                         }
                         else if (isInRubyTag == false && word.ToString() == ">")
                         {
-                            Debug.Log("> です。");
+                            
                             isInTag = false;
                             isCloseTag = true;
                            
@@ -216,18 +216,18 @@ public class TalkWindow : MonoBehaviour
 
                             textNum = tagStrings.Count();
                             bool isCanCheck = false;
-                            Debug.Log(textNum);
+                            
 
                             if (textNum >= 4)
                             {
                                 isCanCheck = true; 
                                 text = tagStrings.Substring(tagStrings.Length - 4);
-                                Debug.Log(text);
+                                
                             }
 
                             if (isCanCheck == true && text == "</r>")
                             {
-                                Debug.Log("締め");
+                               
                                 isInTag = false;
                                 isCloseTag = true;
                                 isInRubyTag = false;
@@ -244,13 +244,13 @@ public class TalkWindow : MonoBehaviour
                         else if (isInTag == true || isCloseTag == true)
                         {
                             tagStrings += word;
-                            Debug.Log("Tab内です。");
+                           
                             continue;
                         }
                         else if (isInRubyTag == true || isCloseTag == true)
                         {
                             tagStrings += word;
-                            Debug.Log("Tab内(ふりがな)です。");
+                            
                             continue;
                         }
                         else

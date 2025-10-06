@@ -7,6 +7,8 @@ public class GameView : ViewBase
 {
     // トークウインドウ.
     [SerializeField] TalkWindow talkWindow = null;
+    // スプレッドシートリーダー.
+    [SerializeField] SpreadSheetReader spreadSheetReader = null;
 
     void Start()
     {
@@ -19,7 +21,12 @@ public class GameView : ViewBase
     {
         base.OnViewOpened();
 
-        var data = talkWindow.Talks;
+        // テストデータなのでコメントアウト.
+        // var data = talkWindow.Talks;
+        string _sheetId = "1yFNPA1Wl7FcbgGHC7fp8U_G0zcl24l5Mwudpl8n542g";
+        string _sheetName = "Prologue";
+        var data = await spreadSheetReader.LoadSpreadSheet(_sheetId, _sheetName);
+
         try
         {
             await talkWindow.SetBg(data[0].Place, true);
